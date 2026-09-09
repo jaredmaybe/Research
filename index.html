@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>research hahaahahhaa</title>
+<style>
+  * {
+    box-sizing: border-box;
+    font-family: Georgia, 'Times New Roman', serif;
+  }
+  body {
+    margin: 0;
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: linear-gradient(180deg, #ed84e6 0%, #cb60e1 55%, #ec8add 100%);
+    color: #efefef;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px 80px;
+  }
+  .page-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin-bottom: 6px;
+  }
+  h1 {
+    font-family: Georgia, 'Times New Roman', serif;
+    letter-spacing: 2px;
+    font-size: 2.2rem;
+    margin: 0;
+    text-align: center;
+    background: linear-gradient(90deg, #fff8d6 0%, #ffd4ef 20%, #ffffff 45%, #d9c8ff 70%, #f8d0ff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 18px rgba(232, 226, 226, 0.2);
+  }
+  .cat-icon {
+    width: 52px;
+    height: 52px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 8px 18px rgba(0,0,0,0.25);
+  }
+  p.subtitle {
+    font-family: Georgia, 'Times New Roman', serif;
+    color: #f4f4f4;
+    margin-top: 0;
+    margin-bottom: 30px;
+    font-style: italic;
+    text-align: center;
+  }
+  .open-btn {
+    font-family: Georgia, 'Times New Roman', serif;
+    background: linear-gradient(180deg, #ca66e0, #af2ebd3f 60%);
+    color: #fff;
+    border: none;
+    padding: 14px 34px;
+    font-size: 1.05rem;
+    font-weight: bold;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    letter-spacing: 1px;
+  }
+  .open-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 22px rgba(0,0,0,0.5);
+  }
+
+  .video-btn {
+    font-family: Georgia, 'Times New Roman', serif;
+    margin-top: 18px;
+    background: linear-gradient(180deg, #a51aa1, #cf53ac);
+    color: #fff;
+    border: none;
+    padding: 12px 26px;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 999px;
+    cursor: pointer;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .video-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 22px rgba(0, 0, 0, 0.28);
+  }
+
+  .thankyou-btn {
+    position: fixed;
+    top: 18px;
+    left: 18px;
+    z-index: 1100;
+    font-family: Georgia, 'Times New Roman', serif;
+    background: linear-gradient(180deg, rgba(255,255,255,0.25), rgba(255,255,255,0.1));
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.4);
+    padding: 10px 18px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    border-radius: 999px;
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+    backdrop-filter: blur(4px);
+  }
+
+  .thankyou-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.28);
+  }
+
+  .video-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+  .video-modal.show {
+    display: flex;
+  }
+  .video-modal-inner {
+    position: relative;
+    width: min(90vw, 1100px);
+    aspect-ratio: 16 / 9;
+    background: #000;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+  }
+  .video-modal-inner video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: #000;
+  }
+  .video-close {
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    width: 38px;
+    height: 38px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+    font-size: 1.7rem;
+    line-height: 1;
+    cursor: pointer;
+    z-index: 2;
+  }
+
+  .thankyou-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(16, 8, 22, 0.78);
+    z-index: 1200;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+
+  .thankyou-modal.show {
+    display: flex;
+  }
+
+  .thankyou-card {
+    position: relative;
+    width: min(92vw, 680px);
+    max-height: 80vh;
+    overflow-y: auto;
+    background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(247,228,255,0.95));
+    color: #3b1f42;
+    border-radius: 18px;
+    padding: 30px 28px 24px;
+    box-shadow: 0 22px 60px rgba(0,0,0,0.45);
+  }
+
+  .thankyou-card h2 {
+    margin: 0 0 14px;
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    text-align: center;
+    color: #562e6d;
+  }
+
+  .thankyou-card p {
+    margin: 0 0 14px;
+    line-height: 1.7;
+    font-size: 1rem;
+  }
+
+  .thankyou-close {
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(122, 69, 146, 0.12);
+    color: #4d215d;
+    font-size: 1.7rem;
+    cursor: pointer;
+  }
+
+  /* Clothesline collage */
+  .collage {
+    display: none;
+    margin-top: 40px;
+    max-width: 1200px;
+    width: 100%;
+  }
+  .collage.show {
+    display: block;
+    animation: fadeIn 0.5s ease;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.97); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  .collage-title {
+    font-family: Georgia, 'Times New Roman', serif;
+    background: linear-gradient(90deg, #f3e9ff 0%, #f0eef4 35%, #b1aecf 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-size: 1.4rem;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    margin-bottom: 18px;
+    text-align: left;
+  }
+  .clothesline-row {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    padding-top: 26px;
+    margin-bottom: 46px;
+  }
+  .clothesline-row::before {
+    content: "";
+    position: absolute;
+    top: 8px;
+    left: -20px;
+    right: -20px;
+    height: 2px;
+    background: rgba(255,255,255,0.85);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+  }
+  .polaroid {
+    position: relative;
+    background: #fdf9f0;
+    padding: 8px;
+    border-radius: 3px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    flex: 1 1 0;
+    min-width: 0;
+  }
+  .polaroid img {
+    width: 100%;
+    height: 130px;
+    object-fit: cover;
+    display: block;
+    border-radius: 1px;
+  }
+  .polaroid:hover {
+    transform: translateY(-4px) scale(1.04);
+    box-shadow: 0 16px 28px rgba(0,0,0,0.35);
+    z-index: 5;
+  }
+  .peg {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 14px;
+    height: 26px;
+    background: linear-gradient(180deg, #e0a53a, #b97d1e);
+    border-radius: 4px 4px 2px 2px;
+    box-shadow: 0 2px 3px rgba(0,0,0,0.3);
+    z-index: 2;
+  }
+  .peg::after {
+    content: "";
+    position: absolute;
+    bottom: 2px;
+    left: 3px;
+    right: 3px;
+    height: 6px;
+    background: rgba(0,0,0,0.15);
+    border-radius: 2px;
+  }
+
+  /* Lightbox */
+  .lightbox {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.9);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .lightbox.show { display: flex; }
+  .lightbox img {
+    max-width: 90vw;
+    max-height: 78vh;
+    border-radius: 6px;
+    box-shadow: 0 0 40px rgba(0,0,0,0.7);
+  }
+  .lightbox .close-btn {
+    position: absolute;
+    top: 24px;
+    right: 34px;
+    background: none;
+    border: none;
+    color: #b003d2;
+    font-size: 2.4rem;
+    cursor: pointer;
+    line-height: 1;
+  }
+  .nav-btn {
+    background: rgba(166, 12, 237, 0.15);
+    border: 1px solid #b003d2;
+    color: #b003d2;
+    font-size: 1.6rem;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .nav-btn:hover { background: rgba(199, 63, 206, 0.3); }
+  .prev-btn { left: 20px; }
+  .next-btn { right: 20px; }
+  .counter {
+    margin-top: 16px;
+    color: #cbb896;
+    font-style: italic;
+  }
+
+  @media (max-width: 700px) {
+    .clothesline-row {
+      flex-wrap: wrap;
+    }
+    .polaroid {
+      flex: 1 1 40%;
+    }
+  }
+</style>
+</head>
+<body>
+
+  <button class="thankyou-btn" onclick="openLetter()">Thank You</button>
+
+  <div class="page-header">
+    <h1>PR2 Group 1</h1>
+    <img class="cat-icon" src="images/cat.png" alt="Cat icon">
+  </div>
+  <p class="subtitle"></p>
+
+  <button class="open-btn" onclick="toggleCollage()">Pindota :) </button>
+  <button class="video-btn" onclick="openVideo()">Transition
+  </button>
+
+  <div class="video-modal" id="videoModal" aria-hidden="true">
+    <div class="video-modal-inner">
+      <button class="video-close" onclick="closeVideo()" aria-label="Close video">&times;</button>
+      <video id="researchVideo" controls playsinline preload="metadata">
+        <source src="images/research.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </div>
+
+  <div class="thankyou-modal" id="thankYouModal" aria-hidden="true">
+    <div class="thankyou-card">
+      <button class="thankyou-close" onclick="closeLetter()" aria-label="Close thank you letter">&times;</button>
+      <h2>Thank You!</h2>
+      <p>Dear PR2 Group 1,</p>
+      <p>Thank you for all the effort, laughter, teamwork, and memories we shared throughout this journey. Every photo, every moment, and every challenge helped make this experience meaningful and unforgettable.</p>
+      <p>We are grateful for the support, creativity, and friendship that made this project special. Your dedication and spirit brought so much life to everything we did.</p>
+      <p>Thank you for making this chapter beautiful, fun, and worth remembering.</p>
+      <p>With appreciation,<br>PR2 Group 1</p>
+    </div>
+  </div>
+
+  <div class="collage" id="collage">
+    <div class="collage-title">Pr2 Experience HAHAHA
+    </div>
+
+    <div class="clothesline-row">
+      <div class="polaroid" onclick="openLightbox(0)"><div class="peg"></div>
+        <img src="images/photo1.png" alt="Photo 1">
+      </div>
+      <div class="polaroid" onclick="openLightbox(1)"><div class="peg"></div>
+        <img src="images/photo2.png" alt="Photo 2">
+      </div>
+      <div class="polaroid" onclick="openLightbox(2)"><div class="peg"></div>
+        <img src="images/photo3.png" alt="Photo 3">
+      </div>
+      <div class="polaroid" onclick="openLightbox(3)"><div class="peg"></div>
+        <img src="images/photo4.png" alt="Photo 4">
+      </div>
+    </div>
+
+    <div class="clothesline-row">
+      <div class="polaroid" onclick="openLightbox(4)"><div class="peg"></div>
+        <img src="images/photo5.png" alt="Photo 5">
+      </div>
+      <div class="polaroid" onclick="openLightbox(5)"><div class="peg"></div>
+        <img src="images/photo7.png" alt="Photo 7">
+      </div>
+      <div class="polaroid" onclick="openLightbox(6)"><div class="peg"></div>
+        <img src="images/photo8.jpg" alt="Photo 8">
+      </div>
+      <div class="polaroid" onclick="openLightbox(7)"><div class="peg"></div>
+        <img src="images/photo9.png" alt="Photo 9">
+      </div>
+    </div>
+
+    <div class="clothesline-row">
+      <div class="polaroid" onclick="openLightbox(8)"><div class="peg"></div>
+        <img src="images/photo10.png" alt="Photo 10">
+      </div>
+      <div class="polaroid" onclick="openLightbox(9)"><div class="peg"></div>
+        <img src="images/photo11.png" alt="Photo 11">
+      </div>
+      <div class="polaroid" onclick="openLightbox(10)"><div class="peg"></div>
+        <img src="images/photo12.png" alt="Photo 12">
+      </div>
+      <div class="polaroid" onclick="openLightbox(11)"><div class="peg"></div>
+        <img src="images/photo13.png" alt="Photo 13">
+      </div>
+    </div>
+  </div>
+
+  <div class="lightbox" id="lightbox">
+    <button class="close-btn" onclick="closeLightbox()">&times;</button>
+    <button class="nav-btn prev-btn" onclick="navigate(-1)">&#10094;</button>
+    <img id="lightbox-img" src="" alt="">
+    <button class="nav-btn next-btn" onclick="navigate(1)">&#10095;</button>
+    <div class="counter" id="counter"></div>
+  </div>
+
+<script>
+  const images = [
+    'images/photo1.png',
+    'images/photo2.png',
+    'images/photo3.png',
+    'images/photo4.png',
+    'images/photo5.png',
+    'images/photo7.png',
+    'images/photo8.jpg',
+    'images/photo9.png',
+    'images/photo10.png',
+    'images/photo11.png',
+    'images/photo12.png',
+    'images/photo13.png'
+  ];
+  let currentIndex = 0;
+
+  function toggleCollage() {
+    const collage = document.getElementById('collage');
+    collage.classList.toggle('show');
+  }
+
+  function openVideo() {
+    const modal = document.getElementById('videoModal');
+    const video = document.getElementById('researchVideo');
+    modal.classList.add('show');
+    modal.setAttribute('aria-hidden', 'false');
+    video.play().catch(() => {});
+  }
+
+  function closeVideo() {
+    const modal = document.getElementById('videoModal');
+    const video = document.getElementById('researchVideo');
+    modal.classList.remove('show');
+    modal.setAttribute('aria-hidden', 'true');
+    video.pause();
+    video.currentTime = 0;
+  }
+
+  function openLetter() {
+    document.getElementById('thankYouModal').classList.add('show');
+    document.getElementById('thankYouModal').setAttribute('aria-hidden', 'false');
+  }
+
+  function closeLetter() {
+    document.getElementById('thankYouModal').classList.remove('show');
+    document.getElementById('thankYouModal').setAttribute('aria-hidden', 'true');
+  }
+
+  function openLightbox(index) {
+    currentIndex = index;
+    updateLightbox();
+    document.getElementById('lightbox').classList.add('show');
+  }
+
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('show');
+  }
+
+  function navigate(delta) {
+    currentIndex = (currentIndex + delta + images.length) % images.length;
+    updateLightbox();
+  }
+
+  function updateLightbox() {
+    document.getElementById('lightbox-img').src = images[currentIndex];
+    document.getElementById('counter').textContent = (currentIndex + 1) + ' / ' + images.length;
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (document.getElementById('videoModal').classList.contains('show') && e.key === 'Escape') {
+      closeVideo();
+    }
+    if (document.getElementById('thankYouModal').classList.contains('show') && e.key === 'Escape') {
+      closeLetter();
+    }
+    if (!document.getElementById('lightbox').classList.contains('show')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowRight') navigate(1);
+    if (e.key === 'ArrowLeft') navigate(-1);
+  });
+
+  document.getElementById('lightbox').addEventListener('click', (e) => {
+    if (e.target.id === 'lightbox') closeLightbox();
+  });
+
+  document.getElementById('videoModal').addEventListener('click', (e) => {
+    if (e.target.id === 'videoModal') closeVideo();
+  });
+
+  document.getElementById('thankYouModal').addEventListener('click', (e) => {
+    if (e.target.id === 'thankYouModal') closeLetter();
+  });
+</script>
+
+</body>
+</html>
