@@ -3,556 +3,971 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>research hahaahahhaa</title>
+<meta name="description" content="A little keepsake for PR2 Group 1 — photos, the transition video, and a thank you note.">
+<meta name="theme-color" content="#e7b9e7">
+<title>PR2 Group 1 — Thank You</title>
+<link rel="icon" type="image/jpeg" href="images/cat.png">
 <style>
-  * {
-    box-sizing: border-box;
-    font-family: Georgia, 'Times New Roman', serif;
+  /* ----------------------------------------------------------------
+     Tokens
+  ---------------------------------------------------------------- */
+  :root {
+    --ink: #3a1233;
+    --ink-soft: #5d2a53;
+    --ink-muted: #7f5b77;
+    --paper: #fffaf6;
+    --cream: #fdf6ee;
+    --rose: #ff6fae;
+    --hot: #d6347f;
+    --plum: #7b2f6e;
+
+    --shadow-soft: 0 18px 40px -20px rgba(58, 18, 51, .45);
+    --shadow-lift: 0 30px 65px -26px rgba(58, 18, 51, .55);
+
+    --font-display: 'Iowan Old Style', 'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif;
+    --font-body: Georgia, 'Iowan Old Style', 'Times New Roman', serif;
+    --font-ui: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+    --radius-card: 26px;
+    --radius-pill: 999px;
+    --ease: cubic-bezier(.22, .61, .36, 1);
   }
+
+  /* ----------------------------------------------------------------
+     Reset & page shell
+  ---------------------------------------------------------------- */
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+    scrollbar-gutter: stable;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  html.is-locked { overflow: hidden; }
+
   body {
+    display: flex;
+    flex-direction: column;
     margin: 0;
-    font-family: 'Georgia', 'Times New Roman', serif;
-   background: linear-gradient(180deg, #f4ace2 0%, #d888e8 55%, #ce4bbb 100%);
-    color: #efefef;
     min-height: 100vh;
+    min-height: 100svh;
+    padding: clamp(28px, 5vw, 64px) clamp(16px, 4vw, 40px) clamp(56px, 8vw, 96px);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--ink);
+    background-color: #e7b9e7;
+    background-image:
+      radial-gradient(58rem 42rem at 8% -12%, #ffd7ea 0%, rgba(255, 215, 234, 0) 62%),
+      radial-gradient(48rem 38rem at 98% 0%, #d9c4ff 0%, rgba(217, 196, 255, 0) 60%),
+      radial-gradient(52rem 40rem at 50% 106%, #ffb3d3 0%, rgba(255, 179, 211, 0) 64%),
+      linear-gradient(168deg, #fbd3e7 0%, #eab9e6 42%, #cf93d8 100%);
+    background-repeat: no-repeat;
+  }
+
+  /* Fine paper grain over the whole page, purely decorative. */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: .45;
+    mix-blend-mode: soft-light;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23g)' opacity='.55'/%3E%3C/svg%3E");
+    background-size: 180px 180px;
+  }
+
+  main {
+    position: relative;
+    z-index: 1;
+    flex: 1 1 auto;
+    width: 100%;
+    max-width: 1120px;
+    margin-inline: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 40px 20px 80px;
-  }
-  .page-header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 14px;
-    margin-bottom: 6px;
-  }
-  h1 {
-    font-family: Georgia, 'Times New Roman', serif;
-    letter-spacing: 2px;
-    font-size: 2.2rem;
-    margin: 0;
-    text-align: center;
-    background: linear-gradient(90deg, #fff8d6 0%, #ffd4ef 20%, #ffffff 45%, #d9c8ff 70%, #f8d0ff 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    text-shadow: 0 0 18px rgba(232, 226, 226, 0.2);
-  }
-  .cat-icon {
-    width: 52px;
-    height: 52px;
-    object-fit: cover;
-    border-radius: 12px;
-    box-shadow: 0 8px 18px rgba(0,0,0,0.25);
-  }
-  p.subtitle {
-    font-family: Georgia, 'Times New Roman', serif;
-    color: #f4f4f4;
-    margin-top: 0;
-    margin-bottom: 30px;
-    font-style: italic;
-    text-align: center;
-  }
-  .open-btn {
-    font-family: Georgia, 'Times New Roman', serif;
-    background: linear-gradient(180deg, #ca66e0, #af2ebd3f 60%);
-    color: #fff;
-    border: none;
-    padding: 14px 34px;
-    font-size: 1.05rem;
-    font-weight: bold;
-    border-radius: 30px;
-    cursor: pointer;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.4);
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
-    letter-spacing: 1px;
-  }
-  .open-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 22px rgba(0,0,0,0.5);
   }
 
-  .video-btn {
-    font-family: Georgia, 'Times New Roman', serif;
-    margin-top: 18px;
-    background: linear-gradient(180deg, #a51aa1, #cf53ac);
-    color: #fff;
-    border: none;
-    padding: 12px 26px;
-    font-size: 1rem;
-    font-weight: 700;
-    border-radius: 999px;
-    cursor: pointer;
-    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
-  }
-  .video-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 22px rgba(0, 0, 0, 0.28);
+  /* Until the photos are revealed there is little to show, so centre the hero. */
+  main.is-collapsed { justify-content: center; }
+
+  img { display: block; max-width: 100%; }
+
+  :where(button):focus-visible,
+  :where(a):focus-visible {
+    outline: 3px solid #fff;
+    outline-offset: 3px;
+    box-shadow: 0 0 0 7px rgba(214, 52, 127, .45);
   }
 
+  /* ----------------------------------------------------------------
+     Thank you tag (fixed)
+  ---------------------------------------------------------------- */
   .thankyou-btn {
     position: fixed;
-    top: 18px;
-    left: 18px;
-    z-index: 1100;
-    font-family: Georgia, 'Times New Roman', serif;
-    background: linear-gradient(180deg, rgba(255,255,255,0.25), rgba(255,255,255,0.1));
-    color: #fff;
-    border: 1px solid rgba(255,255,255,0.4);
+    top: clamp(12px, 2.2vw, 20px);
+    left: clamp(12px, 2.2vw, 20px);
+    z-index: 50;
+    font-family: var(--font-ui);
+    font-size: .85rem;
+    font-weight: 600;
+    letter-spacing: .045em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
     padding: 10px 18px;
-    font-size: 0.95rem;
-    font-weight: 700;
-    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, .9);
+    border-radius: var(--radius-pill);
+    background: rgba(255, 250, 246, .82);
+    box-shadow: 0 12px 26px -16px rgba(58, 18, 51, .9), inset 0 1px 0 #fff;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     cursor: pointer;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.2);
-    backdrop-filter: blur(4px);
+    transition: transform .18s var(--ease), background-color .18s var(--ease), box-shadow .18s var(--ease);
   }
 
   .thankyou-btn:hover {
+    background: #fff;
     transform: translateY(-1px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.28);
+    box-shadow: 0 16px 30px -16px rgba(58, 18, 51, .95), inset 0 1px 0 #fff;
   }
 
-  .video-modal {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.8);
-    z-index: 1000;
-    align-items: center;
-    justify-content: center;
-    padding: 24px;
-  }
-  .video-modal.show {
-    display: flex;
-  }
-  .video-modal-inner {
-    position: relative;
-    width: min(90vw, 1100px);
-    aspect-ratio: 16 / 9;
-    background: #000;
-    border-radius: 18px;
-    overflow: hidden;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
-  }
-  .video-modal-inner video {
-    display: block;
+  /* ----------------------------------------------------------------
+     Hero
+  ---------------------------------------------------------------- */
+  .hero {
     width: 100%;
-    height: 100%;
-    object-fit: contain;
-    background: #000;
-  }
-  .video-close {
-    position: absolute;
-    top: 12px;
-    right: 14px;
-    width: 38px;
-    height: 38px;
-    border: none;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.15);
-    color: #fff;
-    font-size: 1.7rem;
-    line-height: 1;
-    cursor: pointer;
-    z-index: 2;
-  }
-
-  .thankyou-modal {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(16, 8, 22, 0.78);
-    z-index: 1200;
-    align-items: center;
-    justify-content: center;
-    padding: 24px;
-  }
-
-  .thankyou-modal.show {
     display: flex;
+    justify-content: center;
+    margin-bottom: clamp(30px, 6vw, 56px);
   }
 
-  .thankyou-card {
-    position: relative;
-    width: min(92vw, 680px);
-    max-height: 80vh;
-    overflow-y: auto;
-    background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(247,228,255,0.95));
-    color: #3b1f42;
-    border-radius: 18px;
-    padding: 30px 28px 24px;
-    box-shadow: 0 22px 60px rgba(0,0,0,0.45);
-  }
-
-  .thankyou-card h2 {
-    margin: 0 0 14px;
-    font-size: clamp(1.6rem, 3vw, 2.2rem);
+  .hero-card {
+    width: min(100%, 600px);
+    padding: clamp(30px, 5vw, 46px) clamp(22px, 5vw, 48px) clamp(26px, 4.5vw, 40px);
     text-align: center;
-    color: #562e6d;
+    border: 1px solid rgba(255, 255, 255, .85);
+    border-radius: var(--radius-card);
+    background: linear-gradient(180deg, rgba(255, 252, 249, .93), rgba(255, 243, 250, .82));
+    box-shadow: var(--shadow-lift), inset 0 1px 0 #fff;
+    backdrop-filter: blur(16px) saturate(1.1);
+    -webkit-backdrop-filter: blur(16px) saturate(1.1);
   }
 
-  .thankyou-card p {
-    margin: 0 0 14px;
-    line-height: 1.7;
-    font-size: 1rem;
+  .hero-badge {
+    width: max-content;
+    margin: 0 auto clamp(16px, 3vw, 22px);
+    transform: rotate(-3deg);
   }
 
-  .thankyou-close {
-    position: absolute;
-    top: 12px;
-    right: 14px;
-    width: 36px;
-    height: 36px;
-    border: none;
+  .cat-icon {
+    width: clamp(56px, 10vw, 72px);
+    height: clamp(56px, 10vw, 72px);
+    object-fit: cover;
     border-radius: 50%;
-    background: rgba(122, 69, 146, 0.12);
-    color: #4d215d;
-    font-size: 1.7rem;
-    cursor: pointer;
+    outline: 1px solid rgba(255, 255, 255, .95);
+    outline-offset: 3px;
+    box-shadow: 0 12px 24px -12px rgba(58, 18, 51, .85);
   }
 
-  /* Clothesline collage */
-  .collage {
-    display: none;
-    margin-top: 40px;
-    max-width: 1200px;
-    width: 100%;
-  }
-  .collage.show {
-    display: block;
-    animation: fadeIn 0.5s ease;
-  }
-  @keyframes fadeIn {
-    from { opacity: 0; transform: scale(0.97); }
-    to { opacity: 1; transform: scale(1); }
-  }
-  .collage-title {
-    font-family: Georgia, 'Times New Roman', serif;
-    background: linear-gradient(90deg, #f3e9ff 0%, #f0eef4 35%, #b1aecf 100%);
+  h1 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(1.85rem, 6vw, 2.85rem);
+    font-weight: 700;
+    line-height: 1.12;
+    letter-spacing: .02em;
+    color: #5b1e50;
+    background: linear-gradient(165deg, #63205a 0%, #8f3570 58%, #a8447e 100%);
     -webkit-background-clip: text;
     background-clip: text;
-    color: transparent;
-    font-size: 1.4rem;
-    font-weight: bold;
-    letter-spacing: 0.5px;
-    margin-bottom: 18px;
-    text-align: left;
+    -webkit-text-fill-color: transparent;
   }
+
+  .rule {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin: clamp(14px, 3vw, 20px) 0 clamp(20px, 4vw, 28px);
+    color: var(--hot);
+    font-size: .7rem;
+    line-height: 1;
+  }
+
+  .rule::before,
+  .rule::after {
+    content: "";
+    width: clamp(28px, 9vw, 70px);
+    height: 1px;
+    background: linear-gradient(90deg, rgba(122, 47, 110, 0), rgba(122, 47, 110, .35));
+  }
+
+  .rule::after {
+    background: linear-gradient(270deg, rgba(122, 47, 110, 0), rgba(122, 47, 110, .35));
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .btn {
+    font-family: var(--font-ui);
+    font-size: .97rem;
+    font-weight: 600;
+    letter-spacing: .02em;
+    padding: 14px 30px;
+    border: 1px solid transparent;
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+    transition: transform .18s var(--ease), box-shadow .18s var(--ease), background-color .18s var(--ease);
+  }
+
+  .btn:active { transform: translateY(1px) scale(.99); }
+
+  .btn-primary {
+    color: #fff;
+    background: linear-gradient(180deg, #ff74b1 0%, #e03a86 55%, #c22a72 100%);
+    box-shadow: 0 14px 26px -12px rgba(200, 40, 110, .95), inset 0 1px 0 rgba(255, 255, 255, .45);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 20px 32px -14px rgba(200, 40, 110, 1), inset 0 1px 0 rgba(255, 255, 255, .55);
+  }
+
+  .btn-secondary {
+    color: #5b1e50;
+    background: rgba(255, 255, 255, .78);
+    border-color: rgba(122, 47, 110, .18);
+    box-shadow: 0 8px 18px -12px rgba(58, 18, 51, .6);
+  }
+
+  .btn-secondary:hover {
+    background: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 16px 26px -14px rgba(58, 18, 51, .7);
+  }
+
+  /* ----------------------------------------------------------------
+     Photo clothesline
+  ---------------------------------------------------------------- */
+  .collage {
+    width: 100%;
+    scroll-margin-top: clamp(20px, 4vw, 36px);
+    animation: fade-up .55s var(--ease) both;
+  }
+
+  .collage-title span { white-space: nowrap; }
+
+  .collage[hidden] { display: none; }
+
+  .collage-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(12px, 3vw, 18px);
+    margin: 0 0 clamp(4px, 1.5vw, 10px);
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 600;
+    font-size: clamp(1.1rem, 3.4vw, 1.5rem);
+    letter-spacing: .01em;
+    color: #fff;
+    text-align: center;
+    text-shadow: 0 2px 14px rgba(58, 18, 51, .55);
+  }
+
+  .collage-title::before,
+  .collage-title::after {
+    content: "";
+    flex: 0 1 110px;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, .9));
+  }
+
+  .collage-title::after {
+    background: linear-gradient(270deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, .9));
+  }
+
   .clothesline-row {
     position: relative;
-    display: flex;
-    justify-content: space-between;
-    gap: 24px;
-    padding-top: 26px;
-    margin-bottom: 46px;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(14px, 3vw, 28px);
+    padding-top: 46px;
+    margin-bottom: clamp(30px, 5vw, 48px);
   }
+
+  /* Rope */
   .clothesline-row::before {
     content: "";
     position: absolute;
-    top: 8px;
-    left: -20px;
-    right: -20px;
-    height: 2px;
-    background: rgba(255,255,255,0.85);
-    box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+    top: 24px;
+    left: -14px;
+    right: -14px;
+    height: 3px;
+    border-radius: var(--radius-pill);
+    background: repeating-linear-gradient(115deg,
+      rgba(255, 255, 255, .95) 0 6px,
+      rgba(255, 255, 255, .55) 6px 12px);
+    box-shadow: 0 2px 6px rgba(58, 18, 51, .3);
   }
+
   .polaroid {
     position: relative;
-    background: #fdf9f0;
-    padding: 8px;
-    border-radius: 3px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 9px 9px 26px;
+    border: 0;
+    border-radius: 4px;
+    background: #fffdf8;
+    box-shadow: var(--shadow-soft);
     cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    flex: 1 1 0;
-    min-width: 0;
+    transform: rotate(var(--tilt, 0deg));
+    transition: transform .22s var(--ease), box-shadow .22s var(--ease);
   }
+
+  .polaroid:nth-child(4n + 1) { --tilt: -1.4deg; }
+  .polaroid:nth-child(4n + 2) { --tilt: .9deg; }
+  .polaroid:nth-child(4n + 3) { --tilt: -0.6deg; }
+  .polaroid:nth-child(4n + 4) { --tilt: 1.5deg; }
+
   .polaroid img {
     width: 100%;
-    height: 130px;
+    aspect-ratio: 4 / 3;
+    height: auto;
     object-fit: cover;
-    display: block;
-    border-radius: 1px;
+    border-radius: 2px;
+    background: #ecdfe9;
   }
-  .polaroid:hover {
-    transform: translateY(-4px) scale(1.04);
-    box-shadow: 0 16px 28px rgba(0,0,0,0.35);
-    z-index: 5;
-  }
-  .peg {
-    position: absolute;
-    top: -20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 14px;
-    height: 26px;
-    background: linear-gradient(180deg, #e0a53a, #b97d1e);
-    border-radius: 4px 4px 2px 2px;
-    box-shadow: 0 2px 3px rgba(0,0,0,0.3);
+
+  .polaroid:hover,
+  .polaroid:focus-visible {
+    transform: rotate(0deg) translateY(-6px) scale(1.03);
+    box-shadow: var(--shadow-lift);
     z-index: 2;
   }
+
+  /* Wooden peg hanging the print on the line */
+  .peg {
+    position: absolute;
+    top: -22px;
+    left: 50%;
+    width: 10px;
+    height: 26px;
+    border-radius: 3px 3px 2px 2px;
+    background: linear-gradient(180deg, #f0c48a, #c9924f);
+    box-shadow: 0 2px 4px rgba(58, 18, 51, .45);
+    transform: translateX(-50%);
+    z-index: 2;
+  }
+
   .peg::after {
     content: "";
     position: absolute;
-    bottom: 2px;
-    left: 3px;
-    right: 3px;
-    height: 6px;
-    background: rgba(0,0,0,0.15);
+    bottom: 4px;
+    left: 2px;
+    right: 2px;
+    height: 5px;
     border-radius: 2px;
+    background: rgba(90, 55, 20, .28);
   }
 
-  /* Lightbox */
-  .lightbox {
+  .polaroid:nth-child(odd) .peg { transform: translateX(-50%) rotate(-5deg); }
+  .polaroid:nth-child(even) .peg { transform: translateX(-50%) rotate(4deg); }
+
+  /* ----------------------------------------------------------------
+     Overlays (video, letter, lightbox)
+  ---------------------------------------------------------------- */
+  .overlay {
     display: none;
     position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(0,0,0,0.9);
-    z-index: 1000;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-  }
-  .lightbox.show { display: flex; }
-  .lightbox img {
-    max-width: 90vw;
-    max-height: 78vh;
-    border-radius: 6px;
-    box-shadow: 0 0 40px rgba(0,0,0,0.7);
-  }
-  .lightbox .close-btn {
-    position: absolute;
-    top: 24px;
-    right: 34px;
-    background: none;
-    border: none;
-    color: #b003d2;
-    font-size: 2.4rem;
-    cursor: pointer;
-    line-height: 1;
-  }
-  .nav-btn {
-    background: rgba(166, 12, 237, 0.15);
-    border: 1px solid #b003d2;
-    color: #b003d2;
-    font-size: 1.6rem;
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    cursor: pointer;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-  .nav-btn:hover { background: rgba(199, 63, 206, 0.3); }
-  .prev-btn { left: 20px; }
-  .next-btn { right: 20px; }
-  .counter {
-    margin-top: 16px;
-    color: #cbb896;
-    font-style: italic;
+    inset: 0;
+    z-index: 900;
+    padding: clamp(16px, 4vw, 40px);
+    background: rgba(30, 10, 28, .78);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
   }
 
-  @media (max-width: 700px) {
+  .overlay.show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: overlay-in .22s ease both;
+  }
+
+  .close-btn {
+    position: absolute;
+    top: clamp(12px, 2.5vw, 22px);
+    right: clamp(12px, 2.5vw, 22px);
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    font-size: 1.6rem;
+    line-height: 1;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, .28);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .14);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    cursor: pointer;
+    transition: background-color .18s var(--ease), transform .18s var(--ease);
+  }
+
+  .close-btn:hover {
+    background: rgba(255, 255, 255, .28);
+    transform: scale(1.04);
+  }
+
+  /* Video */
+  /* The frame hugs the video, so portrait clips don't sit in a letterbox. */
+  .video-frame {
+    display: flex;
+    max-width: min(94vw, 1040px);
+    border-radius: 20px;
+    overflow: hidden;
+    background: #000;
+    box-shadow: 0 34px 70px -24px rgba(0, 0, 0, .85);
+    animation: pop-in .3s var(--ease) both;
+  }
+
+  .video-frame video {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: min(94vw, 1040px);
+    max-height: 78svh;
+    background: #000;
+  }
+
+  /* Letter */
+  .letter {
+    position: relative;
+    width: min(92vw, 620px);
+    max-height: min(84vh, 760px);
+    padding: clamp(30px, 5vw, 48px) clamp(24px, 5vw, 46px) clamp(26px, 4vw, 40px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    border-radius: 22px;
+    border-top: 4px solid transparent;
+    background:
+      linear-gradient(180deg, #fffdf9, #fdf1f7) padding-box,
+      linear-gradient(90deg, #ff9ec6, #c9a4f0) border-box;
+    box-shadow: var(--shadow-lift);
+    color: var(--ink-soft);
+    animation: pop-in .3s var(--ease) both;
+  }
+
+  .letter h2 {
+    margin: 0 0 clamp(16px, 3vw, 24px);
+    font-family: var(--font-display);
+    font-size: clamp(1.55rem, 4.4vw, 2rem);
+    letter-spacing: .01em;
+    text-align: center;
+    color: #5b1e50;
+  }
+
+  .letter h2::after {
+    content: "";
+    display: block;
+    width: 54px;
+    height: 2px;
+    margin: 14px auto 0;
+    border-radius: 2px;
+    background: linear-gradient(90deg, #ff9ec6, #c9a4f0);
+  }
+
+  .letter p {
+    margin: 0 0 1em;
+    font-size: clamp(1rem, 2.7vw, 1.06rem);
+    line-height: 1.78;
+  }
+
+  .letter .greeting { font-size: 1.08rem; }
+
+  .letter .signoff {
+    margin: clamp(18px, 3vw, 26px) 0 0;
+    font-style: italic;
+    color: #6d2a61;
+  }
+
+  .letter .signoff span {
+    display: inline-block;
+    margin-top: 2px;
+    font-family: var(--font-display);
+    font-style: normal;
+    font-size: 1.15rem;
+    color: #4a1242;
+  }
+
+  .card-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    font-size: 1.45rem;
+    line-height: 1;
+    color: var(--ink-soft);
+    border: 1px solid rgba(122, 47, 110, .16);
+    border-radius: 50%;
+    background: rgba(122, 47, 110, .08);
+    cursor: pointer;
+    transition: background-color .18s var(--ease);
+  }
+
+  .card-close:hover { background: rgba(122, 47, 110, .16); }
+
+  /* Lightbox */
+  .lightbox.show {
+    flex-direction: column;
+    gap: clamp(12px, 2.5vw, 20px);
+    background: rgba(18, 6, 17, .94);
+  }
+
+  .lb-stage {
+    flex: 1 1 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 0;
+    width: 100%;
+  }
+
+  .lb-stage img {
+    width: auto;
+    height: auto;
+    max-width: min(100%, 1100px);
+    max-height: 100%;
+    border-radius: 12px;
+    background: #1a0a18;
+    box-shadow: 0 30px 70px -20px rgba(0, 0, 0, .9);
+    animation: pop-in .25s var(--ease) both;
+  }
+
+  .lb-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(12px, 3vw, 22px);
+    flex: 0 0 auto;
+  }
+
+  .lb-nav {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 11px 20px;
+    font-family: var(--font-ui);
+    font-size: .88rem;
+    font-weight: 600;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, .28);
+    border-radius: var(--radius-pill);
+    background: rgba(255, 255, 255, .12);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    cursor: pointer;
+    transition: background-color .18s var(--ease), transform .18s var(--ease);
+  }
+
+  .lb-nav:hover {
+    background: rgba(255, 255, 255, .24);
+    transform: translateY(-1px);
+  }
+
+  .lb-counter {
+    min-width: 5ch;
+    font-family: var(--font-ui);
+    font-size: .82rem;
+    letter-spacing: .1em;
+    text-align: center;
+    color: rgba(255, 255, 255, .78);
+  }
+
+  /* End flourish */
+  .rule--end { margin-top: clamp(6px, 2vw, 14px); }
+
+  /* ----------------------------------------------------------------
+     Motion
+  ---------------------------------------------------------------- */
+  @keyframes overlay-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes pop-in {
+    from { opacity: 0; transform: scale(.97); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: .001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: .001ms !important;
+    }
+  }
+
+  /* ----------------------------------------------------------------
+     Small screens
+  ---------------------------------------------------------------- */
+  @media (max-width: 720px) {
+    /* Leave room for the floating thank-you tag. */
+    body { padding-top: 84px; }
+
+    .btn { padding: 13px 22px; font-size: .93rem; }
+
+    .collage { scroll-margin-top: 84px; }
+
+    .collage-title { gap: 0; }
+    .collage-title::before,
+    .collage-title::after { display: none; }
+
     .clothesline-row {
-      flex-wrap: wrap;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      padding-top: 4px;
+      margin-bottom: 26px;
     }
+
+    /* The rope can't span a wrapped grid, so use tape instead of pegs. */
+    .clothesline-row::before { display: none; }
+    .peg { display: none; }
+
     .polaroid {
-      flex: 1 1 40%;
+      padding: 8px 8px 20px;
     }
+
+    .polaroid::after {
+      content: "";
+      position: absolute;
+      top: -9px;
+      left: 50%;
+      width: 46px;
+      height: 16px;
+      border-radius: 2px;
+      background: rgba(255, 255, 255, .55);
+      box-shadow: 0 2px 5px rgba(58, 18, 51, .18);
+      transform: translateX(-50%) rotate(-3deg);
+      backdrop-filter: blur(2px);
+    }
+
+    .lb-stage img { border-radius: 8px; }
+    .lb-nav { padding: 10px 16px; font-size: .84rem; }
+  }
+
+  @media (max-width: 360px) {
+    .btn { flex: 1 1 100%; }
+    .thankyou-btn { font-size: .76rem; padding: 9px 14px; }
   }
 </style>
 </head>
 <body>
 
-  <button class="thankyou-btn" onclick="openLetter()">Thank You</button>
+  <main class="is-collapsed" id="page">
+    <button type="button" class="thankyou-btn" data-open="letterModal">Thank You</button>
 
-  <div class="page-header">
-    <h1>PR2 Group 1</h1>
-    <img class="cat-icon" src="images/cat.png" alt="Cat icon">
-  </div>
-  <p class="subtitle"></p>
-
-  <button class="open-btn" onclick="toggleCollage()">Pindota :) </button>
-  <button class="video-btn" onclick="openVideo()">Transition
-  </button>
-
-  <div class="video-modal" id="videoModal" aria-hidden="true">
-    <div class="video-modal-inner">
-      <button class="video-close" onclick="closeVideo()" aria-label="Close video">&times;</button>
-      <video id="researchVideo" controls playsinline preload="metadata">
-        <source src="images/research.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
-    </div>
-  </div>
-
-  <div class="thankyou-modal" id="thankYouModal" aria-hidden="true">
-    <div class="thankyou-card">
-      <button class="thankyou-close" onclick="closeLetter()" aria-label="Close thank you letter">&times;</button>
-      <h2>Thank You!</h2>
-      <p>Hi Group 1</p>
-      <p>Salamat sa tanan inyo gibuhat, mo tabang jud mo HAHAHAHA super participative kay mo maski unsa pa kalisod or kahasol inyo gihapon buhaton maski inyo isacrifice inyong tug para buhaton ang paper.</p>
-      <p>Lingaw jud ang subject tungod ninyo salamat feel nako sa if lahi ako group kay dikayko malingaw HAHAHAHAH sige murag corny naman if ako pa ipa taas mao rato.</p>
-      <p>With appreciation,<br>Torino</p>
-    </div>
-  </div>
-
-  <div class="collage" id="collage">
-    <div class="collage-title">Pr2 Experience HAHAHA
-    </div>
-
-    <div class="clothesline-row">
-      <div class="polaroid" onclick="openLightbox(0)"><div class="peg"></div>
-        <img src="images/photo1.png" alt="Photo 1">
+    <header class="hero">
+      <div class="hero-card">
+        <div class="hero-badge">
+          <img class="cat-icon" src="images/cat.png" alt="Cat icon" width="72" height="72">
+        </div>
+        <h1>PR2 Group 1</h1>
+        <div class="rule" aria-hidden="true"><span>♥</span></div>
+        <div class="actions">
+          <button type="button" class="btn btn-primary" id="revealBtn" aria-expanded="false" aria-controls="collage">Pindota :)</button>
+          <button type="button" class="btn btn-secondary" data-open="videoModal">Transition</button>
+        </div>
       </div>
-      <div class="polaroid" onclick="openLightbox(1)"><div class="peg"></div>
-        <img src="images/photo2.png" alt="Photo 2">
-      </div>
-      <div class="polaroid" onclick="openLightbox(2)"><div class="peg"></div>
-        <img src="images/photo3.png" alt="Photo 3">
-      </div>
-      <div class="polaroid" onclick="openLightbox(3)"><div class="peg"></div>
-        <img src="images/photo4.png" alt="Photo 4">
+    </header>
+
+    <!-- Video -->
+    <div class="overlay" id="videoModal" role="dialog" aria-modal="true" aria-label="Transition video" aria-hidden="true">
+      <button type="button" class="close-btn" data-close aria-label="Close video">&times;</button>
+      <div class="video-frame">
+        <video id="researchVideo" controls playsinline preload="metadata">
+          <source src="images/research.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
       </div>
     </div>
 
-    <div class="clothesline-row">
-      <div class="polaroid" onclick="openLightbox(4)"><div class="peg"></div>
-        <img src="images/photo5.png" alt="Photo 5">
-      </div>
-      <div class="polaroid" onclick="openLightbox(5)"><div class="peg"></div>
-        <img src="images/photo7.png" alt="Photo 7">
-      </div>
-      <div class="polaroid" onclick="openLightbox(6)"><div class="peg"></div>
-        <img src="images/photo8.jpg" alt="Photo 8">
-      </div>
-      <div class="polaroid" onclick="openLightbox(7)"><div class="peg"></div>
-        <img src="images/photo9.png" alt="Photo 9">
+    <!-- Thank you letter -->
+    <div class="overlay" id="letterModal" role="dialog" aria-modal="true" aria-labelledby="letterTitle" aria-hidden="true">
+      <div class="letter">
+        <button type="button" class="card-close" data-close aria-label="Close thank you letter">&times;</button>
+        <h2 id="letterTitle">Thank You!</h2>
+        <p class="greeting">Hi Group 1</p>
+        <p>Salamat sa tanan inyo gibuhat, mo tabang jud mo HAHAHAHA super participative kay mo maski unsa pa kalisod or kahasol inyo gihapon buhaton maski inyo isacrifice inyong tug para buhaton ang paper.</p>
+        <p>Lingaw jud ang subject tungod ninyo salamat feel nako sa if lahi ako group kay dikayko malingaw HAHAHAHAH sige murag corny naman if ako pa ipa taas mao rato.</p>
+        <p class="signoff">With appreciation,<br><span>Torino</span></p>
       </div>
     </div>
 
-    <div class="clothesline-row">
-      <div class="polaroid" onclick="openLightbox(8)"><div class="peg"></div>
-        <img src="images/photo10.png" alt="Photo 10">
-      </div>
-      <div class="polaroid" onclick="openLightbox(9)"><div class="peg"></div>
-        <img src="images/photo11.png" alt="Photo 11">
-      </div>
-      <div class="polaroid" onclick="openLightbox(10)"><div class="peg"></div>
-        <img src="images/photo12.png" alt="Photo 12">
-      </div>
-      <div class="polaroid" onclick="openLightbox(11)"><div class="peg"></div>
-        <img src="images/photo13.png" alt="Photo 13">
-      </div>
-    </div>
-  </div>
+    <!-- Photo clothesline -->
+    <section class="collage" id="collage" aria-label="Photos" hidden>
+      <h2 class="collage-title"><span>Pr2 Experience HAHAHA</span></h2>
 
-  <div class="lightbox" id="lightbox">
-    <button class="close-btn" onclick="closeLightbox()">&times;</button>
-    <button class="nav-btn prev-btn" onclick="navigate(-1)">&#10094;</button>
-    <img id="lightbox-img" src="" alt="">
-    <button class="nav-btn next-btn" onclick="navigate(1)">&#10095;</button>
-    <div class="counter" id="counter"></div>
+      <div class="clothesline-row">
+        <button type="button" class="polaroid">
+          <span class="peg" aria-hidden="true"></span>
+          <img src="images/photo1.png" alt="Photo 1" loading="lazy" decoding="async" width="1440" height="1080">
+        </button>
+        <button type="button" class="polaroid">
+          <span class="peg" aria-hidden="true"></span>
+          <img src="images/photo2.png" alt="Photo 2" loading="lazy" decoding="async" width="1536" height="2048">
+        </button>
+        <button type="button" class="polaroid">
+          <span class="peg" aria-hidden="true"></span>
+          <img src="images/photo3.png" alt="Photo 3" loading="lazy" decoding="async" width="1440" height="1080">
+        </button>
+        <button type="button" class="polaroid">
+          <span class="peg" aria-hidden="true"></span>
+          <img src="images/photo4.png" alt="Photo 4" loading="lazy" decoding="async" width="2048" height="1536">
+        </button>
+      </div>
+
+      <div class="clothesline-row">
+        <button type="button" class="polaroid">
+          <span class="peg" aria-hidden="true"></span>
+          <img src="images/photo5.png" alt="Photo 5" loading="lazy" decoding="async" width="2048" height="1536">
+        </button>
+        <button type="button" class="polaroid">
+          <span class="peg" aria-hidden="true"></span>
+          <img src="images/photo7.png" alt="Photo 7" loading="lazy" decoding="async" width="2048" height="1536">
+        </button>
+        <button type="button" class="polaroid">
+          <span class="peg" aria-hidden="true"></span>
+          <img src="images/photo8.jpg" alt="Photo 8" loading="lazy" decoding="async" width="2048" height="1536">
+        </button>
+        <button type="button" class="polaroid">
+          <span class="peg" aria-hidden="true"></span>
+          <img src="images/photo9.png" alt="Photo 9" loading="lazy" decoding="async" width="2048" height="1536">
+        </button>
+      </div>
+
+      <div class="clothesline-row">
+        <button type="button" class="polaroid">
+          <span class="peg" aria-hidden="true"></span>
+          <img src="images/photo10.png" alt="Photo 10" loading="lazy" decoding="async" width="2048" height="1536">
+        </button>
+        <button type="button" class="polaroid">
+          <span class="peg" aria-hidden="true"></span>
+          <img src="images/photo11.png" alt="Photo 11" loading="lazy" decoding="async" width="2048" height="1536">
+        </button>
+        <button type="button" class="polaroid">
+          <span class="peg" aria-hidden="true"></span>
+          <img src="images/photo12.png" alt="Photo 12" loading="lazy" decoding="async" width="2048" height="1536">
+        </button>
+        <button type="button" class="polaroid">
+          <span class="peg" aria-hidden="true"></span>
+          <img src="images/photo13.png" alt="Photo 13" loading="lazy" decoding="async" width="2048" height="1536">
+        </button>
+      </div>
+
+      <div class="rule rule--end" aria-hidden="true"><span>♥</span></div>
+    </section>
+  </main>
+
+  <!-- Lightbox -->
+  <div class="overlay lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer" aria-hidden="true">
+    <button type="button" class="close-btn" data-close aria-label="Close photo viewer">&times;</button>
+    <div class="lb-stage">
+      <img id="lightboxImg" alt="">
+    </div>
+    <div class="lb-bar">
+      <button type="button" class="lb-nav" data-step="-1" aria-label="Previous photo"><span aria-hidden="true">‹</span> Prev</button>
+      <span class="lb-counter" id="counter"></span>
+      <button type="button" class="lb-nav" data-step="1" aria-label="Next photo">Next <span aria-hidden="true">›</span></button>
+    </div>
   </div>
 
 <script>
-  const images = [
-    'images/photo1.png',
-    'images/photo2.png',
-    'images/photo3.png',
-    'images/photo4.png',
-    'images/photo5.png',
-    'images/photo7.png',
-    'images/photo8.jpg',
-    'images/photo9.png',
-    'images/photo10.png',
-    'images/photo11.png',
-    'images/photo12.png',
-    'images/photo13.png'
-  ];
-  let currentIndex = 0;
+(() => {
+  const root = document.documentElement;
+  const overlays = [...document.querySelectorAll('.overlay')];
 
-  function toggleCollage() {
-    const collage = document.getElementById('collage');
-    collage.classList.toggle('show');
+  /* ---------------------------------------------------------------
+     Overlay plumbing: scroll lock, focus handling, backdrop clicks
+  ---------------------------------------------------------------- */
+  const isOpen = (el) => el.classList.contains('show');
+
+  const syncScrollLock = () => {
+    root.classList.toggle('is-locked', overlays.some(isOpen));
+  };
+
+  const focusables = (el) =>
+    [...el.querySelectorAll('button, [href], video, input, [tabindex]:not([tabindex="-1"])')]
+      .filter((node) => !node.disabled && node.offsetParent !== null);
+
+  function openOverlay(el) {
+    if (!el) return;
+    el._returnFocus = document.activeElement;
+    el.classList.add('show');
+    el.setAttribute('aria-hidden', 'false');
+    syncScrollLock();
+    requestAnimationFrame(() => {
+      const target = el.querySelector('[data-autofocus]') || focusables(el)[0] || el;
+      target.focus({ preventScroll: true });
+    });
   }
 
-  function openVideo() {
-    const modal = document.getElementById('videoModal');
-    const video = document.getElementById('researchVideo');
-    modal.classList.add('show');
-    modal.setAttribute('aria-hidden', 'false');
-    video.play().catch(() => {});
+  function closeOverlay(el) {
+    if (!el) return;
+    el.classList.remove('show');
+    syncScrollLock();
+    const back = el._returnFocus;
+    el._returnFocus = null;
+    el.setAttribute('aria-hidden', 'true');
+    if (back && typeof back.focus === 'function') back.focus({ preventScroll: true });
   }
 
-  function closeVideo() {
-    const modal = document.getElementById('videoModal');
-    const video = document.getElementById('researchVideo');
-    modal.classList.remove('show');
-    modal.setAttribute('aria-hidden', 'true');
+  /* ---------------------------------------------------------------
+     Video
+  ---------------------------------------------------------------- */
+  const videoModal = document.getElementById('videoModal');
+  const video = document.getElementById('researchVideo');
+
+  function stopVideo() {
+    if (!video) return;
     video.pause();
-    video.currentTime = 0;
+    try { video.currentTime = 0; } catch { /* not loaded yet */ }
   }
 
-  function openLetter() {
-    document.getElementById('thankYouModal').classList.add('show');
-    document.getElementById('thankYouModal').setAttribute('aria-hidden', 'false');
-  }
+  /* ---------------------------------------------------------------
+     Generic openers + closers
+  ---------------------------------------------------------------- */
+  document.querySelectorAll('[data-open]').forEach((trigger) => {
+    trigger.addEventListener('click', () => {
+      const target = document.getElementById(trigger.dataset.open);
+      openOverlay(target);
+      if (target === videoModal) video?.play().catch(() => {});
+    });
+  });
 
-  function closeLetter() {
-    document.getElementById('thankYouModal').classList.remove('show');
-    document.getElementById('thankYouModal').setAttribute('aria-hidden', 'true');
-  }
+  overlays.forEach((overlay) => {
+    overlay.addEventListener('click', (event) => {
+      const onBackdrop = event.target === overlay;
+      const onClose = event.target.closest('[data-close]');
+      if (!onBackdrop && !onClose) return;
+      if (overlay === videoModal) stopVideo();
+      closeOverlay(overlay);
+    });
+  });
 
-  function openLightbox(index) {
-    currentIndex = index;
-    updateLightbox();
-    document.getElementById('lightbox').classList.add('show');
-  }
+  /* ---------------------------------------------------------------
+     Collage reveal
+  ---------------------------------------------------------------- */
+  const page = document.getElementById('page');
+  const collage = document.getElementById('collage');
+  const revealBtn = document.getElementById('revealBtn');
 
-  function closeLightbox() {
-    document.getElementById('lightbox').classList.remove('show');
-  }
-
-  function navigate(delta) {
-    currentIndex = (currentIndex + delta + images.length) % images.length;
-    updateLightbox();
-  }
-
-  function updateLightbox() {
-    document.getElementById('lightbox-img').src = images[currentIndex];
-    document.getElementById('counter').textContent = (currentIndex + 1) + ' / ' + images.length;
-  }
-
-  document.addEventListener('keydown', (e) => {
-    if (document.getElementById('videoModal').classList.contains('show') && e.key === 'Escape') {
-      closeVideo();
+  revealBtn.addEventListener('click', () => {
+    const opening = collage.hasAttribute('hidden');
+    if (opening) {
+      collage.removeAttribute('hidden');
+    } else {
+      collage.setAttribute('hidden', '');
     }
-    if (document.getElementById('thankYouModal').classList.contains('show') && e.key === 'Escape') {
-      closeLetter();
+    page.classList.toggle('is-collapsed', !opening);
+    revealBtn.setAttribute('aria-expanded', String(opening));
+    if (opening) {
+      collage.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-    if (!document.getElementById('lightbox').classList.contains('show')) return;
-    if (e.key === 'Escape') closeLightbox();
-    if (e.key === 'ArrowRight') navigate(1);
-    if (e.key === 'ArrowLeft') navigate(-1);
   });
 
-  document.getElementById('lightbox').addEventListener('click', (e) => {
-    if (e.target.id === 'lightbox') closeLightbox();
+  /* ---------------------------------------------------------------
+     Lightbox
+  ---------------------------------------------------------------- */
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const counter = document.getElementById('counter');
+  const cards = [...document.querySelectorAll('.polaroid')];
+  const photos = cards.map((card) => card.querySelector('img'));
+  let index = 0;
+
+  function renderPhoto() {
+    const photo = photos[index];
+    if (!photo) return;
+    lightboxImg.src = photo.getAttribute('src');
+    lightboxImg.alt = photo.alt;
+    counter.textContent = `${index + 1} / ${photos.length}`;
+  }
+
+  function step(delta) {
+    index = (index + delta + photos.length) % photos.length;
+    renderPhoto();
+  }
+
+  cards.forEach((card) => {
+    card.addEventListener('click', () => {
+      index = photos.indexOf(card.querySelector('img'));
+      renderPhoto();
+      openOverlay(lightbox);
+    });
   });
 
-  document.getElementById('videoModal').addEventListener('click', (e) => {
-    if (e.target.id === 'videoModal') closeVideo();
+  lightbox.querySelectorAll('[data-step]').forEach((button) => {
+    button.addEventListener('click', () => step(Number(button.dataset.step)));
   });
 
-  document.getElementById('thankYouModal').addEventListener('click', (e) => {
-    if (e.target.id === 'thankYouModal') closeLetter();
+  /* ---------------------------------------------------------------
+     Keyboard: escape, arrows, focus trap
+  ---------------------------------------------------------------- */
+  document.addEventListener('keydown', (event) => {
+    const open = overlays.filter(isOpen).pop();
+
+    if (!open) return;
+
+    if (event.key === 'Escape') {
+      if (open === videoModal) stopVideo();
+      closeOverlay(open);
+      return;
+    }
+
+    if (open === lightbox) {
+      if (event.key === 'ArrowRight') { event.preventDefault(); step(1); return; }
+      if (event.key === 'ArrowLeft') { event.preventDefault(); step(-1); return; }
+    }
+
+    if (event.key === 'Tab') {
+      const items = focusables(open);
+      if (!items.length) return;
+      const first = items[0];
+      const last = items[items.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
   });
+})();
 </script>
 
 </body>
